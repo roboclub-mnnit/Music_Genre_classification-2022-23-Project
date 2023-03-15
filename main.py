@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import xgboost
 import joblib
-
 from werkzeug.utils import secure_filename
 import os
 from wtforms.validators import InputRequired
@@ -19,16 +18,16 @@ model = xgboost.XGBClassifier()
 model.load_model('model.json')
 scaler_filename = "scaler.save"
 sc = joblib.load(scaler_filename)
-genre_map = {0:'blues',
-             1:'classical',
-            2:'country',
-            3:'disco',
-            4:'hiphop',
-            5:'jazz',
-            6:'metal',
-            7:'pop',
-            8:'reggae',
-            9:'rock'}
+genre_map = {0:'BLUES',
+             1:'CLASSICAL',
+            2:'COUNTRY',
+            3:'DISCO',
+            4:'HIPHOP',
+            5:'JAZZ',
+            6:'METAL',
+            7:'POP',
+            8:'REGGAE',
+            9:'ROCK'}
 
 def getdataf(filename):
     y, sr = librosa.load(filename)
@@ -107,7 +106,8 @@ class UploadFileForm(FlaskForm):
     submit = SubmitField("Upload File")
 
 @app.route('/', methods=['GET',"POST"])
-@app.route('/home', methods=['GET',"POST"])
+#@app.route('/home', methods=['GET',"POST"])
+
 
 def home():
     form = UploadFileForm()
@@ -120,8 +120,6 @@ def home():
         #file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename))) # Then save the file
         return genre_map[output[0]]
     return render_template('index.html', form=form)
-
-
 
 
 if __name__ == '__main__':
