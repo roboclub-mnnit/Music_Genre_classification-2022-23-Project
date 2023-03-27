@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre Classification</title>
+</head>
+
+<style>
+    #img {
+        height:100vh;
+        background-image: url('https://img.freepik.com/free-vector/abstract-medical-themed-background_1048-12233.jpg?w=1380&t=st=1678815827~exp=1678816427~hmac=2b4b078eef51e34741b3708cba2397853bcfb43b61406528253b9f690864f031');
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+    }
+    h1   {color: white;}
+    form {font-size: 30px;}
+    
+</style>
+<body >
+    <div id="img">
+
+    
+    <h1 style="text-align: center;">Predict Your Genre</h1>
+
+    <form method='POST' enctype='multipart/form-data'>
+        {{form.hidden_tag()}}
+        {{form.file()}}
+        {{form.submit()}}
+    </form>
+</div>
+</body>
+</html>
