@@ -1,0 +1,183 @@
+ {% extends 'base.html' %}
+
+{% block title %} Prediction {% endblock title %}
+
+ {% block body %}
+<!--<div>-->
+<!--    <h1 align="center">-->
+<!--        Predicted Genre is {{predict}}-->
+<!--    </h1>-->
+<!--</div>-->
+<div class="alert alert-dark" role="alert" style="margin:20px 50px">
+      <h1 align="center">
+        Predicted Genre is : {{predict}}
+    </h1>
+    <hr>
+    {% if predict == "HIP-HOP" %}
+        <p style="font-size:20px"> Hip hop music is a genre that originated in African-American and Latino communities in the United States in the 1970s.
+            It is characterized by its use of spoken lyrics, electronic beats, and sampling of other music genres.
+            Hip hop music has had a significant impact on popular culture, influencing fashion, art, and other aspects of society.
+            The beats in hip hop music are typically created using drum machines and other electronic instruments, with samples and other sounds often incorporated to add texture and depth to the music.
+        </p>
+     {% endif %}
+
+    {% if predict == "JAZZ" %}
+        <p style="font-size: 20px">
+            Jazz music originated in the African American communities of New Orleans in the early 20th century.
+            It is characterized by its use of improvisation and syncopated rhythms.
+            Jazz music often features brass and woodwind instruments like the trumpet and saxophone, and is associated with the swing dance craze of the 1920s and 30s.
+            Some famous jazz musicians include Louis Armstrong, Duke Ellington, and Miles Davis.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "CLASSICAL" %}
+        <p style="font-size: 20px">
+            Classical music is a genre of music that originated in Europe around the 18th century.
+            It is known for its sophisticated and intricate compositions, often featuring orchestral instruments such as the violin, piano, and cello.
+            Classical music is characterized by its structured and formal style, and is often performed in concert halls.
+            Some famous classical composers include Mozart, Beethoven, and Bach.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "COUNTRY" %}
+        <p style="font-size: 20px">
+            Country music originated in the southern United States in the early 20th century.
+            It is characterized by its use of acoustic guitars, fiddles, and storytelling lyrics.
+            Country music often features themes of love, heartbreak, and life in rural America.
+            Some famous country musicians include Johnny Cash, Dolly Parton, and Willie Nelson.
+            Country music is known for its authenticity and emotional resonance.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "ROCK" %}
+        <p style="font-size: 20px">
+            Rock music emerged in the 1950s as a subgenre of rhythm and blues. It is characterized by its use of electric guitars, bass, drums, and vocals.
+            Rock music often features energetic performances and powerful lyrics that speak to the rebellious spirit of youth culture.
+            Some famous rock bands include The Beatles, Rolling Stones, and Led Zeppelin.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "BLUES" %}
+        <p style="font-size: 20px">
+            Blues music originated in the African American communities of the southern United States in the late 19th century.
+            It is characterized by its use of 12-bar chord progressions and expressive lyrics.
+            Blues music often features acoustic guitars and harmonicas, and is known for its emotional depth and soulful sound.
+            Some famous blues musicians include B.B. King, Muddy Waters, and Robert Johnson.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "DISCO" %}
+        <p style="font-size: 20px">
+            Disco music originated in the United States in the 1970s.
+            It is characterized by its use of electronic instruments, a four-on-the-floor beat, and catchy melodies.
+            Disco music often features lyrics about dancing and having fun, and is associated with the disco dance craze of the 1970s.
+            Some famous disco artists include Donna Summer, Bee Gees, and Chic.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "POP" %}
+        <p style="font-size: 20px">
+            Pop music is a genre that originated in the 1950s. It is characterized by its catchy melodies and simple song structures.
+            Pop music often features electronic instruments and is designed to appeal to a broad audience.
+            Some famous pop artists include Michael Jackson, Beyonce, and Taylor Swift. Pop music is known for its upbeat and optimistic vibe.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "METAL" %}
+        <p style="font-size: 20px">
+            Metal music is a subgenre of rock that emerged in the 1970s.
+            It is known for its aggressive sound and lyrics, and often features heavy distortion, fast tempos, and complex guitar riffs.
+            Some famous metal bands include Metallica, Iron Maiden, and Black Sabbath. Metal music is known for its intensity and passionate fan base.
+        </p>
+
+    {% endif %}
+
+    {% if predict == "REGGAE" %}
+        <p style="font-size: 20px">
+            Reggae music originated in Jamaica in the late 1960s and is known for its laid-back, upbeat rhythm and socially conscious lyrics.
+            It often features bass guitar and percussion instruments like the bongos and congas, and is associated with the Rastafari movement.
+            Reggae music is known for its relaxing and uplifting vibe.It is instantly recognizable from the counterpoint between the bass and drum downbeat and the offbeat rhythm section.
+            The immediate origins of reggae were in ska and rocksteady; from the latter, reggae took over the use of the bass as a percussion instrument.
+        </p>
+
+    {% endif %}
+
+</div>
+ <br>
+ <div style="margin:20px 50px">
+     <h3>
+         Other Popular {{predict}} Songs You May Like
+     </h3>
+ </div>
+
+<!-- ALL SONG RECOMMENDATIONS-->
+ <div style="margin:20px 50px">
+
+     <div class="alert alert-secondary" role="alert" id="rec1">
+<!--         <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/{{hashcodes[0]}}?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>-->
+         {{tracks[0]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[1]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[2]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[3]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[4]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[5]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[6]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[7]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[8]}}
+    </div>
+
+     <div class="alert alert-secondary" role="alert" >
+         {{tracks[9]}}
+    </div>
+ </div>
+<!-- <div style="margin: 10px 70px border" >-->
+<!--     {% if predict == "HIPHOP" %}-->
+<!--        <p> Hip hop music is a genre that originated in African-American and Latino communities in the United States in the 1970s.-->
+<!--            It is characterized by its use of spoken lyrics, electronic beats, and sampling of other music genres.-->
+<!--            Hip hop music has had a significant impact on popular culture, influencing fashion, art, and other aspects of society.-->
+<!--        </p>-->
+<!--     {% endif %}-->
+<!-- </div>-->
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+  {% endblock body %}
+

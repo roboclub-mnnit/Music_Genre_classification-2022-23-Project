@@ -1,0 +1,77 @@
+
+
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+ 
+ {% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+
+
+{% block body %}
+ <br>
+ <br>
+ <div style="font-size: 19px ; border-style:outset; margin:0px 40px">
+     <h1 align="center" > Our Objective</h1>
+     <p style="margin:30px 160px "> If one has to manually classify the songs or music, one has to listen to a lot of songs and then select the genre.
+         This is not only time-consuming but also difficult.
+         The objective of automating the music classification is to make the selection of songs quick and less cumbersome.</p>
+     <p style="margin: 20px 160px">
+         A music genre classifier is a software program that predicts the genre of a piece of music in audio format. These devices are used for tasks such as automatically tagging music for distributors such as Spotify and Billboard and determining appropriate background music for events.
+The ambiguity of genre classification makes machine intelligence well-suited to this task. Given enough audio data, of which large amounts can be easily harvested from freely available music online, machine learning can observe and make predictions using these ill-defined patterns.
+The goal of this project is to build a proof-of-concept music genre classifier using a deep learning approach that can correctly predict the genre and confidence level of Western music from popular candidate genres (classical, jazz, rap, rock, etc.. ).
+
+     </p>
+ </div>
+
+ <br>
+ <section class="team">
+		<div class="center">
+			<h1>Our Team</h1>
+		</div>
+
+		<div class="team-content">
+			<div class="box">
+				<img class="sidhant"src="../static/img/01.jpeg" alt="Avatar">
+				<h5>Siddhant Bhardwaj</h5>
+				<div class="icons">
+					<a href="https://www.linkedin.com/in/siddhant-bhardwaj-a42686251/"><i class="ri-twitter-fill"><img style="width: 50px;" src="../static/img/linkedin.jfif"></a>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="../static/img/02.jpeg">
+				<h5>Alok Kumar Singh</h5>
+				<div class="icons">
+					<a href="https://www.linkedin.com/in/alok-kumar-singh-085439224/"><i class="ri-twitter-fill"><img style="width: 50px;" src="../static/img/linkedin.jfif"></a>
+					</div>
+				</div>
+				
+				<div class="box">
+					<img src="../static/img/03.jpeg">
+					<h5>Shreyansh Sinha</h5>
+					<div class="icons">
+					<a href="https://www.linkedin.com/in/shreyansh-sinha-5415a1263/"><i class="ri-twitter-fill"><img style="width: 50px;" src="../static/img/linkedin.jfif"></a>
+				</div>
+			</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+  {% endblock body %}
