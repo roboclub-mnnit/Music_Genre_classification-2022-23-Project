@@ -1,3 +1,5 @@
+import base64
+
 from flask import Flask,render_template,request,redirect
 import pickle
 import numpy as np
@@ -5,6 +7,51 @@ import pandas as pd
 import xgboost
 import librosa
 import joblib
+from dotenv import load_dotenv
+import os
+from requests import post,get
+import json
+
+load_dotenv()
+
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
+
+def get_token():
+    auth_string = client_id + ":" + client_secret
+    auth_bytes = auth_string.encode("utf-8")
+    auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
+
+    url = "https://accounts.spotify.com/api/token"
+    headers = {
+        "Authorization": "Basic " + auth_base64,
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+
+    data = {"grant_type": "client_credentials"}
+    result = post(url, headers = headers, data = data)
+    json_result = json.loads(result.content)
+    token = json_result["access_token"]
+    return token
+
+def get_auth_header(token):
+    return {"Authorization": "Bearer " + token}
+
+def get_songs_by_genre(token,genre):
+    url = f"https://api.spotify.com/v1/recommendations?seed_genres={genre}&limit=10"
+    headers = get_auth_header(token)
+    result = get(url, headers = headers)
+    json_result = json.loads(result.content)['tracks']
+
+    return json_result
+
+token = get_token()
+# songs = get_songs_by_genre(token,"jazz")
+#
+# for idx,song in enumerate(songs):
+#     href = song['href']
+#     hashcode = href[len(href)-22:len(href)]
+#     print(f"{idx+1}. {hashcode}")
 
 app = Flask(__name__)
 
@@ -16,7 +63,7 @@ genre_map = {0:'BLUES',
              1:'CLASSICAL',
             2:'COUNTRY',
             3:'DISCO',
-            4:'HIPHOP',
+            4:'HIP-HOP',
             5:'JAZZ',
             6:'METAL',
             7:'POP',
@@ -81,17 +128,39 @@ def getdataf(filename):
         metadata_dict.update({'mfcc' + str(i) + '_var': np.var(mfcc[i - 1])})
     df_meta = pd.DataFrame(metadata_dict, index=[0])
     return df_meta
+predict=""
+def ML_model(f):
+    global predict
+    a = 0
+    m_df = getdataf(f)
+    m_df = sc.transform(m_df)
 
+    output = model.predict(m_df)
+    predict = genre_map[output[0]]
+    return predict
 
 
 @app.route('/', methods = ['GET', "POST"])
-def hello_world():
+def index():
     if request.method == "POST":
         f = request.files['file']
 
 
-
     return render_template('index.html')
+
+@app.route('/recorded', methods = ['GET', 'POST'])
+def hello_world():
+    if request.method == "POST":
+        f = request.files['audio_data']
+        with open('audio.wav', 'wb') as audio:
+            f.save(audio)
+        print('file uploaded successfully')
+
+        predict = ML_model("audio.wav")
+
+
+
+    return render_template('index_2.html')
 
 @app.route('/genre',methods = ["POST"])
 def genre():
@@ -102,7 +171,28 @@ def genre():
 
         output = model.predict(m_df)
         predict = genre_map[output[0]]
-        return render_template('genre.html',predict = predict, file =f)
+
+        songs = songs = get_songs_by_genre(token, predict.lower());
+        tracks = [];
+        hashcodes = [];
+        for idx, song in enumerate(songs):
+            href = song['href']
+            hashcode = href[len(href) - 22:len(href)]
+            tracks.append(f"{idx + 1}. {song['name']}")
+            hashcodes.append(hashcode)
+        return render_template('genre.html',predict = predict, file =f, tracks = tracks, hashcodes = json.dumps(hashcodes))
+
+@app.route('/genre_', methods=["POST"])
+def genre_():
+    songs = songs = get_songs_by_genre(token, predict.lower());
+    tracks = [];
+    hashcodes = [];
+    for idx, song in enumerate(songs):
+        href = song['href']
+        hashcode = href[len(href) - 22:len(href)]
+        tracks.append(f"{idx + 1}. {song['name']}")
+        hashcodes.append(hashcode)
+    return render_template('genre_.html', predict=predict, tracks = tracks, hashcodes = json.dumps(hashcodes))
 
 
 
