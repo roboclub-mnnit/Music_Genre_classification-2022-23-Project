@@ -4,7 +4,7 @@ from flask import Flask,render_template,request,redirect
 import pickle
 import numpy as np
 import pandas as pd
-import xgboost
+import xgboost as xgb
 import librosa
 import joblib
 from dotenv import load_dotenv
@@ -55,8 +55,8 @@ token = get_token()
 
 app = Flask(__name__)
 
-model = xgboost.XGBClassifier()
-model.load_model('model.json')
+model = xgb.XGBClassifier()
+model.load_model("model.json")
 scaler_filename = "scaler.save"
 sc = joblib.load(scaler_filename)
 genre_map = {0:'BLUES',
@@ -172,27 +172,27 @@ def genre():
         output = model.predict(m_df)
         predict = genre_map[output[0]]
 
-        songs = songs = get_songs_by_genre(token, predict.lower());
-        tracks = [];
-        hashcodes = [];
+        songs = get_songs_by_genre(token, predict.lower())
+        tracks = []
+        embed_links=[]
         for idx, song in enumerate(songs):
             href = song['href']
-            hashcode = href[len(href) - 22:len(href)]
+            embed_link='https://open.spotify.com/embed/track/'+href.split('/')[-1]
+            embed_links.append(embed_link)
             tracks.append(f"{idx + 1}. {song['name']}")
-            hashcodes.append(hashcode)
-        return render_template('genre.html',predict = predict, file =f, tracks = tracks, hashcodes = json.dumps(hashcodes))
+        return render_template('genre.html',predict = predict, file =f, embed_links=embed_links, tracks = tracks)
 
 @app.route('/genre_', methods=["POST"])
 def genre_():
     songs = songs = get_songs_by_genre(token, predict.lower());
-    tracks = [];
-    hashcodes = [];
+    tracks = []
+    embed_links=[]
     for idx, song in enumerate(songs):
         href = song['href']
-        hashcode = href[len(href) - 22:len(href)]
+        embed_link='https://open.spotify.com/embed/track/'+href.split('/')[-1]
+        embed_links.append(embed_link)
         tracks.append(f"{idx + 1}. {song['name']}")
-        hashcodes.append(hashcode)
-    return render_template('genre_.html', predict=predict, tracks = tracks, hashcodes = json.dumps(hashcodes))
+    return render_template('genre_.html', predict=predict, tracks = tracks, embed_links=embed_links)
 
 
 
